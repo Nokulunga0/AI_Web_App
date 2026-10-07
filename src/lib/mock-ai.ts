@@ -5,12 +5,12 @@ export function mockEmail(purpose: string, tone: string, recipient?: string): Em
   const topic = purpose.trim().replace(/\.$/, "");
   const short = topic.length > 60 ? topic.slice(0, 57) + "…" : topic;
   const greet = recipient ? recipient : tone === "Friendly" ? "there" : "Sir/Madam";
-  const openers: Record<string, string> = {
+  const openers: Record<"Formal" | "Friendly" | "Persuasive", string> = {
     Formal: `Dear ${greet},\n\nI hope this message finds you well. I am writing regarding the following matter: ${topic}.`,
     Friendly: `Hi ${greet},\n\nHope you're having a great week! I wanted to reach out about something: ${topic}.`,
     Persuasive: `Dear ${greet},\n\nI'd like to share an opportunity I believe is well worth your attention: ${topic}.`,
   };
-  const middles: Record<string, string> = {
+  const middles: Record<"Formal" | "Friendly" | "Persuasive", string> = {
     Formal:
       "I would be grateful if you could review this at your earliest convenience. Please let me know if any further information or documentation is required from my side.",
     Friendly:
@@ -18,17 +18,17 @@ export function mockEmail(purpose: string, tone: string, recipient?: string): Em
     Persuasive:
       "Acting on this now would save time, reduce effort later, and deliver clear value. I'm confident it is the right next step, and I'd be glad to walk you through the details.",
   };
-  const closers: Record<string, string> = {
+  const closers: Record<"Formal" | "Friendly" | "Persuasive", string> = {
     Formal: "Thank you for your time and consideration.\n\nKind regards,\n[Your Name]",
     Friendly: "Thanks so much!\n\nCheers,\n[Your Name]",
     Persuasive: "Could we schedule 15 minutes this week to move forward?\n\nBest regards,\n[Your Name]",
   };
-  const subj: Record<string, string> = {
+  const subj: Record<"Formal" | "Friendly" | "Persuasive", string> = {
     Formal: `Regarding: ${short}`,
     Friendly: `Quick note about ${short}`,
     Persuasive: `Let's move forward: ${short}`,
   };
-  const t = (openers[tone] ? tone : "Formal") as "Formal";
+  const t = (["Formal","Friendly","Persuasive"].includes(tone) ? tone : "Formal") as "Formal" | "Friendly" | "Persuasive";
   return {
     subject: subj[t].charAt(0).toUpperCase() + subj[t].slice(1),
     body: `${openers[t]}\n\n${middles[t]}\n\n${closers[t]}`,
