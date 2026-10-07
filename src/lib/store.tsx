@@ -109,7 +109,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         const j = i + dir;
         if (i < 0 || j < 0 || j >= s.tasks.length) return s;
         const tasks = [...s.tasks];
-        [tasks[i], tasks[j]] = [tasks[j], tasks[i]];
+        [tasks[i], tasks[j]] = [tasks[j]!, tasks[i]!];
         return { ...s, tasks };
       }),
     setTasks: (tasks) => setState((s) => ({ ...s, tasks })),

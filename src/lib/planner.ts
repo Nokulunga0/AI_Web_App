@@ -39,7 +39,7 @@ export function rankTasks(tasks: Task[], today: string): RankedTask[] {
 }
 
 const toMin = (hhmm: string) => {
-  const [h, m] = hhmm.split(":").map(Number);
+  const [h = 0, m = 0] = hhmm.split(":").map(Number);
   return h * 60 + (m || 0);
 };
 const toHHMM = (m: number) =>
@@ -78,7 +78,7 @@ export function buildBlocks(
       }
       const chunk = Math.min(remaining, avail);
       blocks.push({
-        date: days[di],
+        date: days[di]!,
         start: toHHMM(cursor),
         end: toHHMM(cursor + chunk),
         taskId: t.id,

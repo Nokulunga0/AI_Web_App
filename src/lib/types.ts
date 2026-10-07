@@ -10,7 +10,7 @@ export interface Task {
   category: string;
   completed: boolean;
   createdAt: string;
-  aiReason?: string;
+  aiReason?: string | undefined;
 }
 
 export interface ScheduleBlock {

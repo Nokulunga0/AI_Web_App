@@ -40,7 +40,7 @@ function TasksPage() {
 
   const prioritize = async () => {
     const pending = s.tasks.filter((t) => !t.completed);
-    if (!pending.length) return toast.info("No pending tasks to prioritize.");
+    if (!pending.length) { toast.info("No pending tasks to prioritize."); return; }
     setLoading(true); setError(null);
     try {
       const r = await prioritizeTasks({ data: { tasks: pending, today, demo: s.settings.demoMode } });

@@ -1,6 +1,6 @@
 /** Server-only helper: calls the AI gateway and returns parsed JSON, or null when no key is configured. */
 export async function callAiJson(system: string, user: string): Promise<any | null> {
-  const key = process.env.LOVABLE_API_KEY;
+  const key = process.env['LOVABLE_API_KEY'];
   if (!key) return null;
   const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
     method: "POST",

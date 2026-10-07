@@ -114,7 +114,7 @@ function Dashboard() {
             ) : (
               <ul className="space-y-3">
                 {s.activity.slice(0, 7).map((a) => {
-                  const Icon = activityIcon[a.type];
+                  const Icon = activityIcon[a.type] ?? CheckCircle2;
                   return (
                     <li key={a.id} className="flex gap-3 text-sm">
                       <Icon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />

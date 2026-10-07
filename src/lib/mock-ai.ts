@@ -28,7 +28,7 @@ export function mockEmail(purpose: string, tone: string, recipient?: string): Em
     Friendly: `Quick note about ${short}`,
     Persuasive: `Let's move forward: ${short}`,
   };
-  const t = openers[tone] ? tone : "Formal";
+  const t = (openers[tone] ? tone : "Formal") as "Formal";
   return {
     subject: subj[t].charAt(0).toUpperCase() + subj[t].slice(1),
     body: `${openers[t]}\n\n${middles[t]}\n\n${closers[t]}`,
@@ -58,7 +58,7 @@ export function mockMeeting(notes: string): MeetingResult {
       const ownerMatch = s.match(/^([A-Z][a-z]+)(?:\s(?:will|to|needs?|should|must|is going))/) ||
         s.match(/assigned to ([A-Z][a-z]+)/) || s.match(/^([A-Z][a-z]+):/);
       const dateMatch = s.match(DATE_RE);
-      actionItems.push({ task: s, owner: ownerMatch ? ownerMatch[1] : null, deadline: dateMatch ? dateMatch[0] : null });
+      actionItems.push({ task: s, owner: ownerMatch?.[1] ?? null, deadline: dateMatch ? dateMatch[0] : null });
       continue;
     }
     keyPoints.push(s);

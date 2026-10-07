@@ -30,7 +30,7 @@ function SchedulePage() {
   const pending = s.tasks.filter((t) => !t.completed);
 
   const generate = async () => {
-    if (!pending.length) return toast.info("Add some pending tasks first.");
+    if (!pending.length) { toast.info("Add some pending tasks first."); return; }
     setLoading(true); setError(null);
     try {
       const today = toISODate(new Date());
