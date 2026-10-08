@@ -44,12 +44,11 @@ function Dashboard() {
     .filter((t) => t.deadline && (daysUntil(t.deadline, today) ?? 99) <= 14)
     .sort((a, b) => a.deadline.localeCompare(b.deadline))
     .slice(0, 6);
-  const hour = new Date().getHours();
-  const greet = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+  const title = s.settings.name ? `Welcome back, ${s.settings.name}` : "Welcome back";
 
   return (
     <div className="space-y-6">
-      <PageHeader title={`${greet}${s.settings.name ? `, ${s.settings.name}` : ""}`} description="Here's what's on your plate today." />
+      <PageHeader title={title} description="Here's what's on your plate today." />
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
         <Stat label="Due today" value={dueToday.length} icon={Clock} />
