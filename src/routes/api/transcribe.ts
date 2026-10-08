@@ -9,7 +9,7 @@ export const Route = createFileRoute("/api/transcribe")({
       POST: async ({ request }) => {
         const len = Number(request.headers.get("content-length") ?? 0);
         if (len > MAX_BYTES + 512 * 1024) return Response.json({ error: "Audio is too large." }, { status: 413 });
-        const apiKey = process.env.LOVABLE_API_KEY;
+        const apiKey = process.env["LOVABLE_API_KEY"];
         if (!apiKey) return Response.json({ error: "Transcription is not configured." }, { status: 500 });
         let file: unknown;
         try {

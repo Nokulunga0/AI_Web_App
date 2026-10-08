@@ -74,7 +74,7 @@ export async function toSegments(file: Blob): Promise<File[]> {
 
 async function transcribeOne(file: File, onDelta: (t: string) => void, signal?: AbortSignal): Promise<string> {
   const form = new FormData(); form.append("file", file, file.name);
-  const res = await fetch("/api/transcribe", { method: "POST", body: form, signal });
+  const res = await fetch("/api/transcribe", { method: "POST", body: form, signal: signal ?? null });
   if (!res.ok || !res.body) {
     let msg = `Transcription failed (${res.status}).`;
     try { const j = await res.json(); msg = j.error?.message ?? j.error ?? j.message ?? msg; } catch { /* keep */ }
